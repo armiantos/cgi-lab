@@ -34,7 +34,7 @@ cookie_password = cookie.get(
 
 # Question 5
 if os.environ['REQUEST_METHOD'] == 'POST' and is_authenticated(form_username, form_password):
-    set_username_password_cookies(cookie, form_username, form_password)
+    set_username_password_cookies(form_username, form_password)
 
 # Autofill form data from cookie
 if cookie_username is not None and cookie_password is not None:
@@ -44,6 +44,7 @@ if cookie_username is not None and cookie_password is not None:
 print('Content-Type: text/html')
 print()
 
+# Question 6
 if is_authenticated(form_username, form_password):
     print(secret_page(username=form_username, password=form_password))
 elif os.environ['REQUEST_METHOD'] == 'POST' and not is_authenticated(form_username, form_password):
