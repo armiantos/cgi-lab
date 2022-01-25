@@ -40,7 +40,9 @@ if os.environ['REQUEST_METHOD'] == 'POST' and is_authenticated(form_username, fo
 print('Content-Type: text/html')
 print()
 
-if is_authenticated(form_username, form_password):
+if os.environ['REQUEST_METHOD'] == 'POST' and not is_authenticated(form_username, form_password):
+    print(after_login_incorrect())
+elif is_authenticated(form_username, form_password):
     print(secret_page(username=form_username, password=form_password))
 else:
     print(login_page())
