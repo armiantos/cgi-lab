@@ -3,6 +3,6 @@
 import os
 import json
 
-print('Content-Type: application/json;')
+print('Content-Type: text/html')
 print()
-print(json.dumps(dict(os.environ)))
+print(f"<p>{os.environ['HTTP_USER_AGENT']}</p>")
