@@ -1,16 +1,23 @@
 #!/usr/bin/env python3
 
 import cgi
-from http.cookies import SimpleCookie
-from templates import login_page
+import secret
+from templates import login_page, secret_page
 
 s = cgi.FieldStorage()
 username = s.getfirst('username')
 password = s.getfirst('password')
 
+
+def is_authenticated() -> bool:
+    return secret.username == username and secret.password == password
+
+
 print('Content-Type: text/html')
 print()
 
-print(login_page())
-if username and password:
-    print(username, password)
+# Question 4
+if is_authenticated():
+    print(secret_page(username=username, password=password))
+else:
+    print(login_page())
